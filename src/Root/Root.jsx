@@ -14,7 +14,7 @@ const Root = () => {
                 <Outlet/>
             </main>
 
-            <footer className='mt-52 flex-none'>
+            <footer className='flex-none'>
                 <Footer/>
             </footer>
 
