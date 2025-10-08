@@ -19,7 +19,7 @@ const Home = () => {
                 <p className='text-xl mt-4 mb-10 text-[#627382] text-center'>Explore All Trending Apps on the Market developed by us</p>
             </div>
 
-            <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5 px-5'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5 px-5 max-w-7xl mx-auto'>
                 
             {
                 loading? 'loading....': apps.map(app => <App key={app.id} app={app}></App>)

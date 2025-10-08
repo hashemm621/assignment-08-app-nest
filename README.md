@@ -77,7 +77,7 @@
 #### Top Apps Section
 
 - Display eight apps in a four-column layout.
-- Each app card should display:
+- Ea :
   - App title
   - Image
   - Download count
