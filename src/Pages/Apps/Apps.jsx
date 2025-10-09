@@ -2,6 +2,8 @@ import { Search } from "lucide-react";
 import React, { useState } from "react";
 import useAppsData from "../../Hooks/useAppsData";
 import AllApps from "../../Components/AllApps/AllApps";
+import Page404 from "../Page404/Page404";
+import AppsNotFound from "../AppsNotFound/AppsNotFound";
 
 const Apps = () => {
     
@@ -40,11 +42,18 @@ const Apps = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {loading
-            ? (<p>"loading...."</p>): error?(<p className="text-red text-5xl">{'error here.....'}</p>)
-            : searchedApps.length>0?(searchedApps.map((app) => <AllApps key={app.id} app={app}></AllApps>)):(<p className="text-4xl">apps not found</p>) }
-        </div>
+        {loading && <p>loading.....</p>}
+        {error && (error.response && error.response.status === 404 ? <Page404/> : <p className="text-red-600 text-center text-3xl py-20">Something went wrong</p>)}
+        {!loading && !error && searchedApps.length === 0 && <AppsNotFound/>}
+
+        
+        {!loading && !error && searchedApps.length > 0 && (
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+      {searchedApps.map((app) => (
+        <AllApps key={app.id} app={app} />
+      ))}
+    </div>
+  )}
       </div>
     </div>
   );
