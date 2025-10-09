@@ -4,6 +4,7 @@ import useAppsData from "../../Hooks/useAppsData";
 import App from "../../Components/App/App";
 import { Link } from "react-router";
 import Page404 from "../Page404/Page404";
+import CardLoading from "../../Components/CardLoading/CardLoading";
 
 
 const Home = () => {
@@ -21,9 +22,14 @@ const Home = () => {
         <p className="text-xl mt-4 mb-10 text-[#627382] text-center">
           Explore All Trending Apps on the Market developed by us
         </p>
+        
       </div>
 
-      {loading && <p>loading.....</p>}
+      <div className="px-5 max-w-7xl mx-auto">
+{loading && <CardLoading count='8'/>}
+      </div>
+
+      
       {/* {error && (error.response && error.response.status === 404 ? <Page404/> : <p className="text-red-600 text-center text-3xl py-20">Something went wrong</p>)} */}
       {error && <Page404 />}
       {!loading && !error && apps.length > 0 && (

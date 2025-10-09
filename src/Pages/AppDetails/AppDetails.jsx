@@ -8,17 +8,15 @@ import Page404 from "../Page404/Page404";
 import { getAppData, setAppData } from "../../Utils/localStorage";
 import { Bounce, ToastContainer } from "react-toastify";
 import {
-  Area,
   Bar,
   CartesianGrid,
   ComposedChart,
-  Legend,
-  Line,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
+import DetailLoading from "../../Components/DetailsLoading/DetailLoading";
 
 const AppDetails = () => {
   const { id } = useParams();
@@ -34,7 +32,7 @@ const AppDetails = () => {
     setIsInstall(isInstalled);
   }, [app]);
 
-  if (loading) return <p>loading..........</p>;
+  if (loading) return  <DetailLoading/>;
   if (error) return <Page404 />;
   const {
     companyName,

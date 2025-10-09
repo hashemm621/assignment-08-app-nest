@@ -4,6 +4,7 @@ import useAppsData from "../../Hooks/useAppsData";
 import AllApps from "../../Components/AllApps/AllApps";
 import Page404 from "../Page404/Page404";
 import AppsNotFound from "../AppsNotFound/AppsNotFound";
+import CardLoading from "../../Components/CardLoading/CardLoading";
 
 const Apps = () => {
     
@@ -42,7 +43,7 @@ const Apps = () => {
           </div>
         </div>
 
-        {loading && <p>loading.....</p>}
+        {loading && <CardLoading/>}
         {error && (error.response && error.response.status === 404 ? <Page404/> : <p className="text-red-600 text-center text-3xl py-20">Something went wrong</p>)}
         {!loading && !error && searchedApps.length === 0 && <AppsNotFound/>}
 
