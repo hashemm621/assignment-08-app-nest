@@ -1,20 +1,35 @@
 import { Search } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAppsData from "../../Hooks/useAppsData";
 import AllApps from "../../Components/AllApps/AllApps";
 import Page404 from "../Page404/Page404";
 import AppsNotFound from "../AppsNotFound/AppsNotFound";
 import CardLoading from "../../Components/CardLoading/CardLoading";
 
+
+
 const Apps = () => {
     
   const { appsData, loading, error } = useAppsData();
   const [search,setSearch] = useState('')
+  const [searchLoading, setSearchLoading] = useState(false)
 
 
   const cleanSearch = search.trim().toLowerCase()
   const searchedApps = cleanSearch? appsData.filter(app => app.title.toLowerCase().includes(cleanSearch)): appsData
     
+
+  useEffect(() => {
+    if(search.trim() === '') {
+      setSearchLoading(false);
+      return
+    }
+    setSearchLoading(true);
+    const timeout = setTimeout(() => {
+      setSearchLoading(false);
+    },400)
+    return () => clearTimeout(timeout)
+  },[search])
   return (
     <div className="py-20 bg-[#D2D2D240]">
       <div className="max-w-7xl mx-auto px-5">
@@ -43,7 +58,7 @@ const Apps = () => {
           </div>
         </div>
 
-        {loading && <CardLoading/>}
+        {(loading || searchLoading) && <CardLoading/>}
         {error && (error.response && error.response.status === 404 ? <Page404/> : <p className="text-red-600 text-center text-3xl py-20">Something went wrong</p>)}
         {!loading && !error && searchedApps.length === 0 && <AppsNotFound/>}
 
